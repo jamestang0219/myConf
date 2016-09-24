@@ -1,0 +1,76 @@
+ syntax enable
+ colorscheme desert
+ syntax on
+ set tabstop=4
+ set softtabstop=4
+ set shiftwidth=4
+ set textwidth=79
+ set expandtab
+ set autoindent
+ set fileformat=unix
+ set encoding=utf-8
+ set nu
+ set nocompatible
+ inoremap ( ()<ESC>i
+ inoremap [ []<ESC>i
+ inoremap { {}<ESC>i
+ inoremap < <><ESC>i
+ inoremap " ""<ESC>i
+ inoremap ' ''<ESC>i
+ set hlsearch
+ filetype off
+ set rtp+=~/.vim/bundle/Vundle.vim
+ call vundle#begin()
+ Plugin 'gmarik/Vundle.vim'
+ Plugin 'tmhedberg/SimpylFold'
+ Plugin 'vim-scripts/indentpython.vim'
+ Plugin 'scrooloose/syntastic'
+ Plugin 'nvie/vim-flake8'
+ Plugin 'altercation/vim-colors-solarized'
+ Plugin 'scrooloose/nerdtree'
+ Bundle "Lokaltog/vim-powerline"
+ call vundle#end()
+ let python_highlight_all=1
+ set background=dark
+ colorscheme solarized
+ filetype plugin indent on
+ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+ set ts=4
+ set laststatus=2
+ let g:Powerline_symbols='unicode'
+function InsertPythonComment()
+    exe 'normal'.1.'G'
+    let line = getline('.')
+    if line =~ '^#!.*$' || line =~ '^#.*coding:.*$'
+        return
+    endif
+    normal O
+    call setline('.', '#!/usr/bin/env python')
+    normal o
+    call setline('.', '# -*- coding:utf-8 -*-')
+    normal o
+    call setline('.', '#')
+    normal o
+    call setline('.', '#   Author  :   '.g:python_author)
+    normal o
+    call setline('.', '#   E-mail  :   '.g:python_email)
+    normal o
+    call setline('.', '#   Date    :   '.strftime("%y/%m/%d %H:%M:%S"))
+    normal o
+    call setline('.', '#   Desc    :   ')
+    normal o
+    call setline('.', '#')
+    normal o
+    call cursor(7, 17)
+endfunction
+function InsertCommentWhenOpen()
+    if a:lastline == 1 && !getline('.')
+        call InsertPythonComment()
+    end
+endfunc
+au FileType python :%call InsertCommentWhenOpen()
+au FileType python map <F4> :call InsertPythonComment()<cr>
+let g:python_author = 'Tang Jing'
+let g:python_email  = 'tangjing@conew.com'
+nnoremap <silent> <F10> :NERDTree<CR>
+set pastetoggle=<F9>
