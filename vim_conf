@@ -28,6 +28,7 @@
  Plugin 'nvie/vim-flake8'
  Plugin 'altercation/vim-colors-solarized'
  Plugin 'scrooloose/nerdtree'
+ Plugin 'fatih/vim-go'
  Bundle "Lokaltog/vim-powerline"
  call vundle#end()
  let python_highlight_all=1
