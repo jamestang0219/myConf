@@ -11,7 +11,7 @@ export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '
 export TERM="xterm-256color"
 
 #enables color for win-screen
-export TERM="screen-256color"
+#export TERM="screen-256color"
 export PATH=~/bin/:$PATH
 
 if [ -f /etc/bashrc ]; then
