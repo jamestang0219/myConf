@@ -1,5 +1,4 @@
  syntax enable
- colorscheme desert
  syntax on
  set backspace=2
  set tabstop=4
@@ -73,6 +72,6 @@ endfunc
 au FileType python :%call InsertCommentWhenOpen()
 au FileType python map <F4> :call InsertPythonComment()<cr>
 let g:python_author = 'Tang Jing'
-let g:python_email  = 'tangjing@conew.com'
+let g:python_email  = 'james19930220@gmail.com'
 nnoremap <silent> <F10> :NERDTree<CR>
 set pastetoggle=<F9>
