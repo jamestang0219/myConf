@@ -19,6 +19,27 @@
  inoremap ' ''<ESC>i
  set hlsearch
  filetype off
+ let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+ let g:tagbar_left = 0
+ nnoremap <F3> :TagbarToggle<CR>
+ nmap <F4> :SrcExplToggle<CR>
+ let g:Srcexpl_winHeight = 8
+ " // Set 100 ms for refreshing the Source Explorer
+ let g:SrcExpl_refreshTime = 100
+ 
+ " // Set "Enter" key to jump into the exact definition context
+ let g:SrcExpl_jumpKey = "<ENTER>"
+ 
+ " // Set "Space" key for back from the definition context
+ let g:SrcExpl_gobackKey = "<SPACE>"
+ 
+ let g:SrcExpl_pluginList = [
+          \ "__Tag_List__",
+                  \ "_NERD_tree_"
+                      \ ]
+ 
+ 
+ set tags=tags;/  "搜索上一级建立的tag
  set rtp+=~/.vim/bundle/Vundle.vim
  call vundle#begin()
  Plugin 'gmarik/Vundle.vim'
@@ -30,12 +51,15 @@
  Plugin 'scrooloose/nerdtree'
  Plugin 'fatih/vim-go'
  Bundle "Lokaltog/vim-powerline"
+ Bundle 'majutsushi/tagbar'
+ Bundle 'wesleyche/SrcExpl'
  call vundle#end()
  let python_highlight_all=1
  set background=dark
  colorscheme solarized
  filetype plugin indent on
- let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+ let NERDTreeIgnore=['\.pyc$', '\~$', '\.o$'] "ignore files in NERDTree
+ set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
  set ts=4
  set laststatus=2
  let g:Powerline_symbols='unicode'
@@ -75,3 +99,7 @@ let g:python_author = 'Tang Jing'
 let g:python_email  = 'james19930220@gmail.com'
 nnoremap <silent> <F10> :NERDTree<CR>
 set pastetoggle=<F9>
+
+"ycm conf
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+set completeopt=longest,menu
